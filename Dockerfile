@@ -20,4 +20,4 @@ EXPOSE 3306 6032
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
-CMD ["/usr/bin/proxysql", "--initial", "-f"]
+CMD ["/usr/bin/proxysql", "-f"]
