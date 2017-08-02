@@ -24,8 +24,8 @@ if [ -z "${MYSQL_MONITOR_PASSWORD}" ]; then
 fi
 
 sed -i -E "s/interfaces=\"(.*):.*\"/interfaces=\"\1:${PROXYSQL_PORT}\"/" /etc/proxysql.cnf
-sed -i -E "s/monitor_username=\"(.*)\"/monitor_username=\"{$MYSQL_MONITOR_USER}\"/" /etc/proxysql.cnf
-sed -i -E "s/monitor_password=\"(.*)\"/monitor_password=\"{$MYSQL_MONITOR_PASSWORD}\"/" /etc/proxysql.cnf
+sed -i -E "s/monitor_username=\"(.*)\"/monitor_username=\"${MYSQL_MONITOR_USER}\"/" /etc/proxysql.cnf
+sed -i -E "s/monitor_password=\"(.*)\"/monitor_password=\"${MYSQL_MONITOR_PASSWORD}\"/" /etc/proxysql.cnf
 
 service proxysql initial
 
