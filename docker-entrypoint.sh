@@ -24,12 +24,17 @@ if [ -z "${MYSQL_MONITOR_PASSWORD}" ]; then
 fi
 
 sed -i -E "s/interfaces=\"(.*):.*\"/interfaces=\"\1:${PROXYSQL_PORT}\"/" /etc/proxysql.cnf
-sed -i -E "s/monitor_username=\"(.*)\"/monitor_username=\"{$MYSQL_MONITOR_USER}\"" /etc/proxysql.cnf
-sed -i -E "s/monitor_password=\"(.*)\"/monitor_password=\"{$MYSQL_MONITOR_PASSWORD}\"" /etc/proxysql.cnf
+sed -i -E "s/monitor_username=\"(.*)\"/monitor_username=\"{$MYSQL_MONITOR_USER}\"/" /etc/proxysql.cnf
+sed -i -E "s/monitor_password=\"(.*)\"/monitor_password=\"{$MYSQL_MONITOR_PASSWORD}\"/" /etc/proxysql.cnf
 
 service proxysql initial
-service proxysql start
 
+# Wait for ProxySQL to start
+while ! nc -z localhost 6032; do   
+  sleep 0.1
+done
+
+# Register containers found through Rancher Metadata API
 for container in $(curl -s http://rancher-metadata/latest/services/${MYSQL_SERVICE_NAME}/containers | sed 's/.=//g'); do
 	echo "Registering MySQL instance ${container}"
 	mysql -h 127.0.0.1 -P6032 -uadmin -padmin -e "INSERT INTO mysql_servers (hostgroup_id, hostname, max_replication_lag) VALUES (0, '${container}', 3306, 10)"
