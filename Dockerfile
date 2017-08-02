@@ -14,6 +14,8 @@ RUN curl -L -o /tmp/proxysql.deb https://github.com/sysown/proxysql/releases/dow
 
 VOLUME /var/lib/proxysql
 
+ADD docker-entrypoint.sh /
+
 EXPOSE 3306 6032
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
