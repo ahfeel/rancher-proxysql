@@ -37,7 +37,7 @@ done
 # Register containers found through Rancher Metadata API
 for container in $(curl -s http://rancher-metadata/latest/services/${MYSQL_SERVICE_NAME}/containers | sed 's/.=//g'); do
 	echo "Registering MySQL instance ${container}"
-	mysql -h 127.0.0.1 -P6032 -uadmin -padmin -e "INSERT INTO mysql_servers (hostgroup_id, hostname, max_replication_lag) VALUES (0, '${container}', 3306, 10)"
+	mysql -h 127.0.0.1 -P6032 -uadmin -padmin -e "INSERT INTO mysql_servers (hostgroup_id, hostname, port, max_replication_lag) VALUES (0, '${container}', 3306, 10)"
 done
 
 mysql -h 127.0.0.1 -P6032 -uadmin -padmin -e "INSERT INTO mysql_users (username, password, active, default_hostgroup, max_connections) VALUES ('${MYSQL_PROXY_USER}', '${MYSQL_PROXY_PASSWORD}', 1, 0, 200);"
