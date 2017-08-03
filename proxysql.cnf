@@ -31,6 +31,7 @@ mysql_variables=
 	commands_stats=true
 	sessions_sort=true
 	connect_retries_on_failure=10
+	monitor_writer_is_also_reader=true
 }
 
 mysql_users:

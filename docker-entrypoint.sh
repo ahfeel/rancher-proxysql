@@ -45,7 +45,7 @@ for container in $(curl -s http://rancher-metadata/latest/services/${MYSQL_SERVI
 	if [ $FIRST != "1" ]; then
 		echo "," >> /etc/proxysql.cnf
 	fi
-	echo "{ address=\"${container}\" , port=3306 , hostgroup=10, max_connections=500 }" >> /etc/proxysql.cnf
+	echo "{ address=\"${container}\" , port=3306 , hostgroup=20, max_connections=500, max_replication_lag=20 }" >> /etc/proxysql.cnf
 	FIRST="0"
 done
 
