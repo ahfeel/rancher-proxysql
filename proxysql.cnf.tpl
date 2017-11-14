@@ -42,6 +42,7 @@ mysql_users:
 		default_hostgroup=10
 		max_connections=1000
 		active=1
+		transaction_persistent=1
 	}
 )
 

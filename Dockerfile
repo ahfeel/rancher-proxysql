@@ -15,7 +15,7 @@ RUN curl -L -o /tmp/proxysql.deb https://github.com/sysown/proxysql/releases/dow
 VOLUME /var/lib/proxysql
 
 ADD docker-entrypoint.sh /
-ADD proxysql.cnf /etc/proxysql.cnf.tpl
+ADD proxysql.cnf.tpl /etc/proxysql.cnf.tpl
 
 EXPOSE 3306 6032
 
