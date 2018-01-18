@@ -2,6 +2,8 @@
 
 : ${MYSQL_SERVICE_NAME:=mysql}
 : ${PROXYSQL_PORT:=3306}
+: ${PROXYSQL_STATS_USER_PASSWORD:=stats}
+: ${PROXYSQL_STATS_WEB_ENABLED:=false}
 
 if [ -z "${MYSQL_PROXY_USER}" ]; then
 	echo "Missing MYSQL_PROXY_USER environment variable."
@@ -32,6 +34,8 @@ sed -i -E "s/%MONITOR_USER%/${MYSQL_MONITOR_USER}/" /etc/proxysql.cnf
 sed -i -E "s/%MONITOR_PASSWORD%/${MYSQL_MONITOR_PASSWORD}/" /etc/proxysql.cnf
 sed -i -E "s/%MYSQL_USER%/${MYSQL_PROXY_USER}/" /etc/proxysql.cnf
 sed -i -E "s/%MYSQL_PASSWORD%/${MYSQL_PROXY_PASSWORD}/" /etc/proxysql.cnf
+sed -i -E "s/%STATS_WEB_ENABLED%/${PROXYSQL_STATS_WEB_ENABLED}/" /etc/proxysql.cnf
+sed -i -E "s/%STATS_USER_PASSWORD%/${PROXYSQL_STATS_USER_PASSWORD}/" /etc/proxysql.cnf
 
 echo "
 mysql_servers =

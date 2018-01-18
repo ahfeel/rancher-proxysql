@@ -4,6 +4,8 @@ admin_variables=
 {
 	admin_credentials="admin:admin"
 	mysql_ifaces="0.0.0.0:6032"
+	admin-web_enabled=%STATS_WEB_ENABLED%
+	admin-stats_credentials="stats:%STATS_USER_PASSWORD%"
 }
 
 mysql_variables=

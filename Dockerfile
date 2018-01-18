@@ -2,7 +2,7 @@ FROM debian:jessie
 
 MAINTAINER Jérémie BORDIER <jeremie.bordier@gmail.com>
 
-ARG PROXYSQL_VERSION=1.4.3
+ARG PROXYSQL_VERSION=1.4.5
 
 RUN apt-get update && \
 	apt-get install -y mysql-client curl netcat && \
@@ -17,7 +17,7 @@ VOLUME /var/lib/proxysql
 ADD docker-entrypoint.sh /
 ADD proxysql.cnf.tpl /etc/proxysql.cnf.tpl
 
-EXPOSE 3306 6032
+EXPOSE 3306 6032 6080
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
