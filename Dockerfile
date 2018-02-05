@@ -2,7 +2,7 @@ FROM debian:jessie
 
 MAINTAINER Jérémie BORDIER <jeremie.bordier@gmail.com>
 
-ARG PROXYSQL_VERSION=1.4.5
+ARG PROXYSQL_VERSION=1.4.6
 
 RUN apt-get update && \
 	apt-get install -y mysql-client curl netcat && \
