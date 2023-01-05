@@ -2,6 +2,7 @@
 
 : ${MYSQL_SERVICE_NAME:=mysql}
 : ${PROXYSQL_PORT:=3306}
+: ${PROXYSQL_WRITER_PORT:=3307}
 : ${PROXYSQL_STATS_USER_PASSWORD:=stats}
 : ${PROXYSQL_STATS_WEB_ENABLED:=false}
 
@@ -29,7 +30,7 @@ fi
 
 cp /etc/proxysql.cnf.tpl /etc/proxysql.cnf
 
-sed -i -E "s/interfaces=\"(.*):.*\"/interfaces=\"\1:${PROXYSQL_PORT}\"/" /etc/proxysql.cnf
+sed -i -E "s/interfaces=\"(.*):.*,(.*):.*\"/interfaces=\"\1:${PROXYSQL_PORT},\2:${PROXYSQL_WRITER_PORT}\"/" /etc/proxysql.cnf
 sed -i -E "s/%MONITOR_USER%/${MYSQL_MONITOR_USER}/" /etc/proxysql.cnf
 sed -i -E "s/%MONITOR_PASSWORD%/${MYSQL_MONITOR_PASSWORD}/" /etc/proxysql.cnf
 sed -i -E "s/%MYSQL_USER%/${MYSQL_PROXY_USER}/" /etc/proxysql.cnf
