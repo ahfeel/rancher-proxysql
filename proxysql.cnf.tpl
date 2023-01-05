@@ -10,13 +10,13 @@ admin_variables=
 
 mysql_variables=
 {
-	threads=4
+	threads=8
 	max_connections=2048
 	default_query_delay=0
 	default_query_timeout=36000000
 	have_compress=true
 	poll_timeout=2000
-	interfaces="0.0.0.0:3306"
+	interfaces="0.0.0.0:3306,0.0.0.0:3307"
 	default_schema="information_schema"
 	stacksize=1048576
 	server_version="5.5.30"
@@ -62,19 +62,26 @@ mysql_query_rules:
 	{
 		rule_id=1
 		active=1
-		match_pattern="^SELECT .* FOR UPDATE$"
+		proxy_port=3307
 		destination_hostgroup=10
 		apply=1
 	},
 	{
 		rule_id=2
 		active=1
-		match_pattern="^SELECT .*SQL_CALC_FOUND_ROWS .*|^SELECT .*FOUND_ROWS().*)"
+		match_pattern="^SELECT .* FOR UPDATE$"
 		destination_hostgroup=10
 		apply=1
 	},
 	{
 		rule_id=3
+		active=1
+		match_pattern="^SELECT .*SQL_CALC_FOUND_ROWS .*|^SELECT .*FOUND_ROWS().*)"
+		destination_hostgroup=10
+		apply=1
+	},
+	{
+		rule_id=4
 		active=1
 		match_pattern="^SELECT"
 		destination_hostgroup=20
