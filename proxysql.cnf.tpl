@@ -4,8 +4,8 @@ admin_variables=
 {
 	admin_credentials="admin:admin"
 	mysql_ifaces="0.0.0.0:6032"
-	admin-web_enabled=%STATS_WEB_ENABLED%
-	admin-stats_credentials="stats:%STATS_USER_PASSWORD%"
+	web_enabled=%STATS_WEB_ENABLED%
+	stats_credentials="stats:%STATS_USER_PASSWORD%"
 }
 
 mysql_variables=
@@ -16,7 +16,7 @@ mysql_variables=
 	default_query_timeout=36000000
 	have_compress=true
 	poll_timeout=2000
-	interfaces="0.0.0.0:3306,0.0.0.0:3307"
+	interfaces="0.0.0.0:3306;0.0.0.0:3307"
 	default_schema="information_schema"
 	stacksize=1048576
 	server_version="5.5.30"
